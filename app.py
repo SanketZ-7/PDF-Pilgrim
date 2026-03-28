@@ -100,7 +100,7 @@ html, body, [class*="css"] {
     border-radius: 18px 18px 4px 18px;
     padding: 0.85rem 1.2rem;
     max-width: 72%;
-    font-size: 1rem;
+    font-size: 1.25rem;
     color: var(--star-white);
     line-height: 1.65;
     box-shadow: 0 4px 20px rgba(0,0,0,0.3);
@@ -111,7 +111,7 @@ html, body, [class*="css"] {
     border-radius: 18px 18px 18px 4px;
     padding: 0.85rem 1.35rem;
     max-width: 82%;
-    font-size: 1rem;
+    font-size: 1.25rem;
     color: var(--mist);
     line-height: 1.75;
     box-shadow: 0 4px 24px rgba(0,0,0,0.4), inset 0 0 40px var(--glow);
@@ -120,7 +120,7 @@ html, body, [class*="css"] {
 
 .avatar-user {
     font-family: 'Cinzel', serif;
-    font-size: 0.62rem;
+    font-size: 0.85rem;
     letter-spacing: 0.15em;
     color: var(--accent-soft);
     text-align: right;
@@ -129,7 +129,7 @@ html, body, [class*="css"] {
 }
 .avatar-bot {
     font-family: 'Cinzel', serif;
-    font-size: 0.62rem;
+    font-size: 0.85rem;
     letter-spacing: 0.15em;
     color: var(--gold-dim);
     margin-bottom: 0.3rem;
@@ -143,12 +143,12 @@ html, body, [class*="css"] {
     border-radius: 6px;
     padding: 0.75rem 1rem;
     margin-bottom: 0.7rem;
-    font-size: 0.9rem;
+    font-size: 1.1rem;
     line-height: 1.6;
 }
 .source-page {
     font-family: 'Cinzel', serif;
-    font-size: 0.7rem;
+    font-size: 0.9rem;
     letter-spacing: 0.12em;
     color: var(--gold);
     margin-bottom: 0.4rem;
@@ -160,10 +160,10 @@ html, body, [class*="css"] {
     background: rgba(201,168,76,0.12);
     border-radius: 20px;
     padding: 0.1rem 0.5rem;
-    font-size: 0.65rem;
+    font-size: 0.85rem;
     color: var(--gold-dim);
 }
-.source-text { color: #a09a8f; font-style: italic; font-size: 0.88rem; }
+.source-text { color: #a09a8f; font-style: italic; font-size: 1.05rem; }
 
 .stTextInput > div > div > input {
     background: rgba(20,26,46,0.9) !important;
@@ -171,7 +171,7 @@ html, body, [class*="css"] {
     border-radius: 12px !important;
     color: var(--star-white) !important;
     font-family: 'EB Garamond', serif !important;
-    font-size: 1rem !important;
+    font-size: 1.2rem !important;
     padding: 0.75rem 1rem !important;
     caret-color: var(--gold) !important;
 }
@@ -190,7 +190,7 @@ html, body, [class*="css"] {
     border: none !important;
     border-radius: 10px !important;
     font-family: 'Cinzel', serif !important;
-    font-size: 0.78rem !important;
+    font-size: 1rem !important;
     font-weight: 600 !important;
     letter-spacing: 0.1em !important;
     padding: 0.5rem 1.2rem !important;
@@ -202,7 +202,7 @@ hr { border-color: var(--border) !important; }
 
 .streamlit-expanderHeader {
     font-family: 'Cinzel', serif !important;
-    font-size: 0.75rem !important;
+    font-size: 0.95rem !important;
     letter-spacing: 0.1em !important;
     color: var(--gold-dim) !important;
     background: rgba(201,168,76,0.03) !important;
@@ -246,7 +246,7 @@ hr { border-color: var(--border) !important; }
 .welcome p {
     font-family: 'Cormorant Garamond', serif;
     font-style: italic;
-    font-size: 1.15rem;
+    font-size: 1.4rem;
     color: var(--gold-dim);
     max-width: 480px;
     margin: 0 auto;
@@ -270,13 +270,13 @@ hr { border-color: var(--border) !important; }
 /* ── Mobile Responsiveness ── */
 @media (max-width: 768px) {
     .rag-header { padding: 1rem 0; margin-bottom: 1rem; }
-    .rag-header .title { font-size: 1.6rem; letter-spacing: 0.08em; }
-    .rag-header .subtitle { font-size: 0.9rem; }
-    .bubble-user { max-width: 90%; padding: 0.7rem 1rem; font-size: 0.95rem; }
-    .bubble-bot { max-width: 95%; padding: 0.7rem 1rem; font-size: 0.95rem; }
-    .source-card { padding: 0.5rem 0.75rem; font-size: 0.85rem; }
+    .rag-header .title { font-size: 2rem; letter-spacing: 0.08em; }
+    .rag-header .subtitle { font-size: 1.1rem; }
+    .bubble-user { max-width: 90%; padding: 0.7rem 1rem; font-size: 1.15rem; }
+    .bubble-bot { max-width: 95%; padding: 0.7rem 1rem; font-size: 1.15rem; }
+    .source-card { padding: 0.5rem 0.75rem; font-size: 1rem; }
     .welcome { padding: 1.5rem 1rem; }
-    .welcome p { font-size: 1rem; line-height: 1.6; }
+    .welcome p { font-size: 1.2rem; line-height: 1.6; }
     .stButton > button { padding: 0.4rem 0.8rem !important; }
 }
 </style>
@@ -390,7 +390,7 @@ with col_main:
 
     # ── Example prompts ──
     st.markdown(
-        '<div style="font-family:\'Cinzel\',serif; font-size:0.6rem; '
+        '<div style="font-family:\'Cinzel\',serif; font-size:0.85rem; '
         'letter-spacing:0.12em; color:#4a5070; margin:0.5rem 0 0.4rem;">'
         'EXAMPLE QUESTIONS</div>',
         unsafe_allow_html=True,

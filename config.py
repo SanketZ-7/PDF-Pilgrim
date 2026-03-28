@@ -19,7 +19,7 @@ except Exception:
 EMBEDDING_MODEL: str = "models/gemini-embedding-001"
 
 # Chat model
-CHAT_MODEL: str = "gemini-3.1-pro-preview"
+CHAT_MODEL: str = "gemini-3.0-flash"
 
 # ── Chunking ─────────────────────────────────────────────────────────────────
 CHUNK_SIZE: int = 800

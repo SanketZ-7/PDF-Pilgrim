@@ -115,10 +115,9 @@ html, body, [class*="css"] {
     padding: 0.85rem 1.2rem;
     max-width: 72%;
     font-size: 1.1rem;
-    color: #ffffff !important;
+    color: #000000 !important;
     line-height: 1.5;
     box-shadow: var(--glass-shadow);
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 }
 .bubble-bot {
     background: rgba(0, 0, 0, 0.25);
@@ -129,12 +128,11 @@ html, body, [class*="css"] {
     padding: 0.85rem 1.35rem;
     max-width: 82%;
     font-size: 1.1rem;
-    color: #ffffff !important;
+    color: #000000 !important;
     line-height: 1.6;
     box-shadow: var(--glass-shadow);
-    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
 }
-.bubble-bot strong, .bubble-user strong, .bubble-bot *, .bubble-user * { color: #ffffff !important; font-weight: 600; }
+.bubble-bot strong, .bubble-user strong, .bubble-bot *, .bubble-user * { color: #000000 !important; font-weight: 600; }
 
 .avatar-user {
     font-size: 0.8rem;

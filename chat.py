@@ -80,7 +80,7 @@ def _show_sources(sources: list[dict[str, Any]]) -> None:
     for i, s in enumerate(sources, start=1):
         print(f"  [{i}] Page {s['page']}  (similarity: {s['score']:.3f})")
         snippet = s["text"][:200].replace("\n", " ")
-        print(f"      "{snippet}…"")
+        print(f'      "{snippet}…"')
     _hr()
 
 

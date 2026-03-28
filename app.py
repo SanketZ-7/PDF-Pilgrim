@@ -26,79 +26,63 @@ st.set_page_config(
 # ── Custom CSS ────────────────────────────────────────────────────────────────
 st.markdown("""
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap');
+
 :root {
-    --glass-bg: rgba(255, 255, 255, 0.06);
-    --glass-bg-strong: rgba(255, 255, 255, 0.12);
-    --glass-border: rgba(255, 255, 255, 0.15);
-    --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
-    --text-main: #f5f5f7;
-    --text-muted: rgba(255, 255, 255, 0.65);
-    --accent: #0A84FF;
+    --book-bg: #090b14;
+    --book-page: #10141f;
+    --book-gold: #d4af37;
+    --book-gold-dim: #9b812c;
+    --book-parchment: #f0ead8;
+    --book-muted: #a39c88;
+    --book-border: rgba(212, 175, 55, 0.25);
 }
 
 html, body, [class*="css"] {
-    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    color: var(--text-main);
+    font-family: 'EB Garamond', serif;
+    color: var(--book-parchment);
 }
 
 .stApp {
-    background: radial-gradient(circle at top right, #2c2d3e 0%, #12131c 100%);
+    background-color: var(--book-bg);
+    background-image: radial-gradient(ellipse at top center, #171d30 0%, var(--book-bg) 70%);
     background-attachment: fixed;
-}
-
-/* Ambient glowing orbs for the macOS wallpaper effect */
-.stApp::before {
-    content: '';
-    position: fixed;
-    top: 10%;
-    left: 15%;
-    width: 400px;
-    height: 400px;
-    background: rgba(10, 132, 255, 0.35);
-    filter: blur(120px);
-    border-radius: 50%;
-    z-index: -1;
-}
-.stApp::after {
-    content: '';
-    position: fixed;
-    bottom: 10%;
-    right: 15%;
-    width: 350px;
-    height: 350px;
-    background: rgba(255, 55, 95, 0.25);
-    filter: blur(120px);
-    border-radius: 50%;
-    z-index: -1;
 }
 
 .rag-header {
     text-align: center;
-    padding: 2rem 0 1.5rem;
-    margin-bottom: 1.5rem;
+    padding: 3rem 0 1.5rem;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid var(--book-border);
+    position: relative;
 }
 .rag-header .title {
-    font-size: 2.2rem;
+    font-family: 'Cinzel', serif;
+    font-size: 3.2rem;
     font-weight: 700;
-    letter-spacing: 0.02em;
-    color: var(--text-main);
+    letter-spacing: 0.08em;
+    color: var(--book-gold);
     margin: 0;
     line-height: 1.2;
+    text-transform: uppercase;
+    text-shadow: 0 2px 15px rgba(212, 175, 55, 0.2);
 }
 .rag-header .subtitle {
-    font-size: 1.1rem;
-    color: var(--text-muted);
-    letter-spacing: 0.02em;
-    margin-top: 0.4rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.4rem;
+    color: var(--book-parchment);
+    letter-spacing: 0.05em;
+    margin-top: 0.6rem;
     font-weight: 400;
 }
 .rag-header .ornament {
-    color: var(--text-muted);
-    font-size: 1.2rem;
+    color: var(--book-gold);
+    font-size: 1.5rem;
     letter-spacing: 0.5em;
-    opacity: 0.3;
+    opacity: 0.7;
     display: block;
-    margin: 0.6rem 0;
+    margin: 1rem 0;
 }
 
 .chat-container { display: flex; flex-direction: column; gap: 1.2rem; padding: 0 0.5rem; }
@@ -107,165 +91,151 @@ html, body, [class*="css"] {
 .msg-bot  { display: flex; justify-content: flex-start; }
 
 .bubble-user {
-    background: var(--accent);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    border-radius: 20px 20px 4px 20px;
-    padding: 0.85rem 1.2rem;
+    background: #171c2b;
+    border: 1px solid var(--book-gold-dim);
+    border-radius: 2px 16px 16px 16px;
+    padding: 1rem 1.4rem;
     max-width: 72%;
-    font-size: 1.1rem;
-    color: #ffffff !important;
-    line-height: 1.5;
-    box-shadow: var(--glass-shadow);
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    font-size: 1.2rem;
+    color: var(--book-parchment) !important;
+    line-height: 1.6;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
 }
 .bubble-bot {
-    background: rgba(0, 0, 0, 0.25);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid var(--glass-border);
-    border-radius: 20px 20px 20px 4px;
-    padding: 0.85rem 1.35rem;
+    background: var(--book-page);
+    border: 1px solid var(--book-border);
+    border-radius: 16px 16px 16px 2px;
+    padding: 1rem 1.5rem;
     max-width: 82%;
-    font-size: 1.1rem;
-    color: #ffffff !important;
-    line-height: 1.6;
-    box-shadow: var(--glass-shadow);
-    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+    font-size: 1.2rem;
+    color: var(--book-parchment) !important;
+    line-height: 1.7;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
 }
-.bubble-bot strong, .bubble-user strong, .bubble-bot *, .bubble-user * { color: #ffffff !important; font-weight: 600; }
+.bubble-bot strong, .bubble-user strong, .bubble-bot *, .bubble-user * { color: var(--book-gold) !important; font-weight: 500; }
 
 .avatar-user {
-    font-size: 0.8rem;
-    font-weight: 600;
-    color: var(--text-muted);
+    font-family: 'Cinzel', serif;
+    font-size: 0.85rem;
+    color: var(--book-muted);
     text-align: right;
     margin-bottom: 0.4rem;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.15em;
 }
 .avatar-bot {
-    font-size: 0.8rem;
-    font-weight: 600;
-    color: var(--text-muted);
+    font-family: 'Cinzel', serif;
+    font-size: 0.85rem;
+    color: var(--book-gold-dim);
     margin-bottom: 0.4rem;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.15em;
 }
 
 .source-card {
-    background: var(--glass-bg);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid var(--glass-border);
-    border-radius: 12px;
+    background: rgba(212, 175, 55, 0.04);
+    border: 1px solid var(--book-border);
+    border-left: 3px solid var(--book-gold);
+    border-radius: 4px;
     padding: 0.75rem 1rem;
     margin-bottom: 0.7rem;
-    font-size: 0.95rem;
+    font-size: 1.05rem;
     line-height: 1.6;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
 }
 .source-page {
-    font-size: 0.9rem;
+    font-family: 'Cinzel', serif;
+    font-size: 0.95rem;
     font-weight: 600;
-    letter-spacing: 0.05em;
-    color: var(--text-main);
+    letter-spacing: 0.1em;
+    color: var(--book-gold);
     margin-bottom: 0.4rem;
     display: flex;
     align-items: center;
     gap: 0.5rem;
 }
 .source-score {
-    background: var(--glass-bg-strong);
-    border: 1px solid var(--glass-border);
-    border-radius: 20px;
+    background: rgba(212, 175, 55, 0.1);
+    border: 1px solid var(--book-border);
+    border-radius: 4px;
     padding: 0.1rem 0.5rem;
-    font-size: 0.85rem;
-    color: var(--text-main);
+    font-size: 0.8rem;
+    color: var(--book-gold-dim);
 }
-.source-text { color: var(--text-muted); font-size: 0.95rem; }
+.source-text { color: var(--book-muted); font-size: 1.05rem; font-style: italic; }
 
 .stTextInput > div > div > input {
-    background: var(--glass-bg) !important;
-    backdrop-filter: blur(16px) !important;
-    -webkit-backdrop-filter: blur(16px) !important;
-    border: 1px solid var(--glass-border) !important;
-    border-radius: 14px !important;
-    color: var(--text-main) !important;
-    font-size: 1.1rem !important;
-    padding: 0.8rem 1.2rem !important;
-    box-shadow: inset 0 1px 3px rgba(0,0,0,0.1) !important;
+    background: #0f121a !important;
+    border: 1px solid var(--book-gold-dim) !important;
+    border-radius: 4px !important;
+    color: var(--book-parchment) !important;
+    font-family: 'EB Garamond', serif !important;
+    font-size: 1.2rem !important;
+    padding: 0.85rem 1.2rem !important;
 }
 .stTextInput > div > div > input:focus {
-    border-color: var(--accent) !important;
-    box-shadow: 0 0 0 3px rgba(10, 132, 255, 0.3) !important;
+    border-color: var(--book-gold) !important;
+    box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.2) !important;
 }
 .stTextInput > div > div > input::placeholder {
-    color: var(--text-muted) !important;
+    color: var(--book-muted) !important;
+    font-style: italic;
 }
 
 .stButton > button {
-    background: var(--glass-bg-strong) !important;
-    backdrop-filter: blur(16px) !important;
-    -webkit-backdrop-filter: blur(16px) !important;
-    color: var(--text-main) !important;
-    border: 1px solid var(--glass-border) !important;
-    border-radius: 12px !important;
-    font-size: 1rem !important;
-    font-weight: 500 !important;
-    padding: 0.5rem 1.2rem !important;
-    box-shadow: var(--glass-shadow) !important;
+    background: transparent !important;
+    color: var(--book-gold) !important;
+    border: 1px solid var(--book-gold) !important;
+    border-radius: 4px !important;
+    font-family: 'Cinzel', serif !important;
+    font-size: 1.05rem !important;
+    letter-spacing: 0.1em !important;
+    padding: 0.6rem 1.2rem !important;
     transition: all 0.2s ease !important;
 }
 .stButton > button:hover {
-    background: rgba(255, 255, 255, 0.15) !important;
-    transform: scale(1.02) !important;
+    background: var(--book-gold) !important;
+    color: var(--book-bg) !important;
 }
 
-hr { border-color: var(--glass-border) !important; }
+hr { border-color: var(--book-border) !important; }
 
 .streamlit-expanderHeader {
+    font-family: 'Cinzel', serif !important;
     font-size: 0.95rem !important;
-    font-weight: 500 !important;
-    color: var(--text-main) !important;
-    background: var(--glass-bg) !important;
-    backdrop-filter: blur(10px) !important;
-    -webkit-backdrop-filter: blur(10px) !important;
-    border: 1px solid var(--glass-border) !important;
-    border-radius: 12px !important;
+    letter-spacing: 0.1em !important;
+    color: var(--book-gold-dim) !important;
+    background: rgba(212, 175, 55, 0.05) !important;
+    border: 1px solid var(--book-border) !important;
+    border-radius: 4px !important;
 }
 .streamlit-expanderContent {
-    border: 1px solid var(--glass-border) !important;
+    border: 1px solid var(--book-border) !important;
     border-top: none !important;
-    border-radius: 0 0 12px 12px !important;
-    background: rgba(0, 0, 0, 0.2) !important;
-    backdrop-filter: blur(10px) !important;
-    -webkit-backdrop-filter: blur(10px) !important;
-    padding: 1rem !important;
+    border-radius: 0 0 4px 4px !important;
+    background: var(--book-page) !important;
+    padding: 1.2rem !important;
 }
 
-.stSpinner > div { border-top-color: var(--accent) !important; }
+.stSpinner > div { border-top-color: var(--book-gold) !important; }
 
 .welcome {
     text-align: center;
-    padding: 3rem 2rem;
-    background: var(--glass-bg);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid var(--glass-border);
-    border-radius: 20px;
-    box-shadow: var(--glass-shadow);
-    margin-top: 2rem;
+    padding: 3rem 2.5rem;
+    background: rgba(212, 175, 55, 0.03);
+    border: 1px solid var(--book-border);
+    border-radius: 8px;
+    margin-top: 1rem;
 }
-.welcome .star { font-size: 2.5rem; display: block; margin-bottom: 1rem; }
+.welcome .star { 
+    font-size: 3rem; 
+    color: var(--book-gold); 
+    display: block; 
+    margin-bottom: 1.2rem; 
+}
 .welcome p {
-    font-size: 1.15rem;
-    color: var(--text-main);
+    font-size: 1.3rem;
+    color: var(--book-parchment);
     max-width: 480px;
     margin: 0 auto;
-    line-height: 1.8;
-    font-weight: 300;
+    line-height: 1.85;
 }
 
 #MainMenu, footer, header { visibility: hidden; }
@@ -273,14 +243,13 @@ hr { border-color: var(--glass-border) !important; }
 /* ── Mobile Responsiveness ── */
 @media (max-width: 768px) {
     .rag-header { padding: 1rem 0; margin-bottom: 1rem; }
-    .rag-header .title { font-size: 2rem; }
-    .rag-header .subtitle { font-size: 1rem; }
-    .bubble-user { max-width: 90%; padding: 0.7rem 1rem; font-size: 1.05rem; }
-    .bubble-bot { max-width: 95%; padding: 0.7rem 1rem; font-size: 1.05rem; }
-    .source-card { padding: 0.6rem 0.8rem; font-size: 0.95rem; }
+    .rag-header .title { font-size: 2.2rem; }
+    .rag-header .subtitle { font-size: 1.15rem; }
+    .bubble-user { max-width: 90%; padding: 0.85rem 1.1rem; font-size: 1.1rem; }
+    .bubble-bot { max-width: 95%; padding: 0.85rem 1.1rem; font-size: 1.1rem; }
+    .source-card { padding: 0.6rem 0.8rem; font-size: 1rem; }
     .welcome { padding: 1.5rem 1rem; }
-    .welcome p { font-size: 1.05rem; line-height: 1.5; }
-    .stButton > button { padding: 0.4rem 0.8rem !important; }
+    .welcome p { font-size: 1.15rem; line-height: 1.6; }
 }
 </style>
 """, unsafe_allow_html=True)
@@ -393,9 +362,9 @@ with col_main:
 
     # ── Example prompts ──
     st.markdown(
-        '<div style="font-size:0.85rem; font-weight:600; '
-        'letter-spacing:0.05em; color:var(--text-muted); margin:0.5rem 0 0.4rem; text-transform:uppercase;">'
-        'EXAMPLE QUESTIONS</div>',
+        '<div style="font-family:\'Cinzel\',serif; font-size:0.9rem; '
+        'letter-spacing:0.15em; color:var(--book-muted); margin:0.8rem 0 0.5rem; text-align:center;">'
+        '· · EXAMPLE QUESTIONS · ·</div>',
         unsafe_allow_html=True,
     )
     ex_cols = st.columns(3)

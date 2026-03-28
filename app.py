@@ -20,8 +20,7 @@ import streamlit as st
 st.set_page_config(
     page_title="Pilgrims of the Stars",
     page_icon="✦",
-    layout="centered",
-    initial_sidebar_state="expanded",
+    layout="centered"
 )
 
 # ── Custom CSS ────────────────────────────────────────────────────────────────
@@ -56,13 +55,6 @@ html, body, [class*="css"] {
                 radial-gradient(ellipse at 80% 100%, #0d1a2e 0%, transparent 60%);
     background-blend-mode: screen;
 }
-
-[data-testid="stSidebar"] {
-    background: linear-gradient(180deg, #0d1021 0%, #111428 100%);
-    border-right: 1px solid var(--border);
-}
-
-[data-testid="stSidebar"] * { color: var(--mist) !important; }
 
 .rag-header {
     text-align: center;
@@ -310,67 +302,8 @@ if "top_k" not in st.session_state:
     st.session_state.top_k = 5
 
 
-# ── Sidebar ───────────────────────────────────────────────────────────────────
-with st.sidebar:
-    st.markdown("""
-    <div style="text-align:center; padding: 1.2rem 0 1rem;">
-        <div style="font-family:'Cinzel',serif; font-size:1.05rem; color:#c9a84c;
-                    letter-spacing:0.15em;">✦ PILGRIMS ✦</div>
-        <div style="font-family:'Cormorant Garamond',serif; font-style:italic;
-                    font-size:0.82rem; color:#7a6030; margin-top:0.2rem;">
-            of the Stars
-        </div>
-    </div>
-    """, unsafe_allow_html=True)
-
-    st.divider()
-
-    # ── Retrieval settings ──
-    st.markdown(
-        '<div style="font-family:\'Cinzel\',serif; font-size:0.68rem; '
-        'letter-spacing:0.15em; color:#7a6030; margin-bottom:0.6rem;">'
-        'RETRIEVAL SETTINGS</div>',
-        unsafe_allow_html=True,
-    )
-
-    top_k = st.slider("Passages to retrieve (top-k)", 1, 10,
-                      st.session_state.top_k, key="top_k_slider")
-    st.session_state.top_k = top_k
-
-    show_sources = st.toggle("Show source passages", value=True)
-
-    st.divider()
-
-    # ── Book info ──
-    st.markdown("""
-    <div class="info-box">
-        <div class="label">ABOUT THE BOOK</div>
-        <em>Pilgrims of the Stars</em> is the spiritual autobiography of
-        <strong style="color:#c9a84c">Dilip Kumar Roy</strong> and
-        <strong style="color:#c9a84c">Indira Devi</strong> — two seekers whose
-        journey led them from the world of music and art to the inner life of
-        yoga and devotion.<br><br>
-        384 pages &nbsp;·&nbsp; First published 1973
-    </div>
-    """, unsafe_allow_html=True)
-
-    # ── Clear chat ──
-    if st.button("✦  Clear Conversation", use_container_width=True):
-        st.session_state.messages = []
-        st.rerun()
-
-    # ── Index status ──
-    from pathlib import Path
-    idx_exists = Path("faiss_index/index.faiss").exists()
-    idx_pill = (
-        '<span class="pill pill-green">● INDEX READY</span>'
-        if idx_exists else
-        '<span class="pill pill-yellow">○ RUN ingest.py</span>'
-    )
-    st.markdown(
-        f"<div style='margin-top:0.8rem; text-align:center;'>{idx_pill}</div>",
-        unsafe_allow_html=True,
-    )
+# ── Configuration Variables ───────────────────────────────────────────────────
+show_sources = True
 
 
 # ── Main layout ───────────────────────────────────────────────────────────────

@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """
 chat.py — Interactive RAG chatbot for "Pilgrims of the Stars".
 
@@ -23,7 +22,7 @@ import config
 from retriever import retrieve, build_context
 
 
-# -- Validate environment ------------------------------------------------------
+# ── Validate environment ──────────────────────────────────────────────────────
 
 def validate_env() -> None:
     if not config.GEMINI_API_KEY:
@@ -35,7 +34,7 @@ def validate_env() -> None:
         )
 
 
-# -- Gemini generation ---------------------------------------------------------
+# ── Gemini generation ─────────────────────────────────────────────────────────
 
 def generate_answer(question: str, context: str) -> str:
     """
@@ -53,17 +52,17 @@ def generate_answer(question: str, context: str) -> str:
         prompt,
         generation_config=genai.types.GenerationConfig(
             temperature=0.2,        # low temperature → factual, grounded answers
-            max_output_tokens=1024,
+            max_output_tokens=8192,
         ),
     )
     return response.text.strip()
 
 
-# -- Pretty printing -----------------------------------------------------------
+# ── Pretty printing ───────────────────────────────────────────────────────────
 
 WIDTH = 80
 
-def _hr(char: str = "-") -> None:
+def _hr(char: str = "─") -> None:
     print(char * WIDTH)
 
 def _wrap(text: str, prefix: str = "") -> None:
@@ -77,15 +76,15 @@ def _wrap(text: str, prefix: str = "") -> None:
 def _show_sources(sources: list[dict[str, Any]]) -> None:
     _hr()
     print("📖  SOURCES")
-    _hr("-")
+    _hr("·")
     for i, s in enumerate(sources, start=1):
         print(f"  [{i}] Page {s['page']}  (similarity: {s['score']:.3f})")
         snippet = s["text"][:200].replace("\n", " ")
-        print(f'      "{snippet}..."')
+        print(f"      "{snippet}…"")
     _hr()
 
 
-# -- Main chat loop ------------------------------------------------------------
+# ── Main chat loop ────────────────────────────────────────────────────────────
 
 def main() -> None:
     validate_env()
@@ -94,7 +93,7 @@ def main() -> None:
     ╔══════════════════════════════════════════════════════════════════════════╗
     ║      📚  PILGRIMS OF THE STARS — RAG Chatbot  (Gemini + FAISS)         ║
     ║      Ask anything about the book.  Type /quit to exit.                 ║
-    ║      Commands: /sources - /reset - /quit                               ║
+    ║      Commands: /sources · /reset · /quit                               ║
     ╚══════════════════════════════════════════════════════════════════════════╝
     """)
     print(banner)
@@ -112,7 +111,7 @@ def main() -> None:
         if not user_input:
             continue
 
-        # -- Commands ---------------------------------------------------------
+        # ── Commands ─────────────────────────────────────────────────────────
         if user_input.lower() in ("/quit", "/exit"):
             print("Goodbye! 🙏")
             break
@@ -130,8 +129,8 @@ def main() -> None:
             print("  ✓ Conversation history cleared.")
             continue
 
-        # -- RAG pipeline -----------------------------------------------------
-        print("  ⟳  Retrieving relevant passages ...", end="\r")
+        # ── RAG pipeline ─────────────────────────────────────────────────────
+        print("  ⟳  Retrieving relevant passages …", end="\r")
 
         try:
             sources = retrieve(user_input, top_k=config.TOP_K)
@@ -141,7 +140,7 @@ def main() -> None:
 
         context = build_context(sources)
 
-        print("  ⟳  Generating answer ...             ", end="\r")
+        print("  ⟳  Generating answer …             ", end="\r")
 
         try:
             answer = generate_answer(user_input, context)
@@ -149,13 +148,13 @@ def main() -> None:
             print(f"\n[ERROR] Generation failed: {exc}")
             continue
 
-        # -- Display -----------------------------------------------------------
+        # ── Display ───────────────────────────────────────────────────────────
         print(" " * 50, end="\r")    # clear spinner line
         _hr()
         _wrap(answer, prefix="Bot › ")
         _hr()
 
-        # -- Update state ------------------------------------------------------
+        # ── Update state ──────────────────────────────────────────────────────
         last_sources = sources
         history.append({"role": "user", "content": user_input})
         history.append({"role": "assistant", "content": answer})

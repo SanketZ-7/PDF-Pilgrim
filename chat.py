@@ -52,7 +52,7 @@ def generate_answer(question: str, context: str) -> str:
         prompt,
         generation_config=genai.types.GenerationConfig(
             temperature=0.2,        # low temperature → factual, grounded answers
-            max_output_tokens=4096,
+            max_output_tokens=8192,
         ),
     )
     return response.text.strip()

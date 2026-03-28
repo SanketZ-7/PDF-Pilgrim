@@ -20,7 +20,7 @@ import streamlit as st
 st.set_page_config(
     page_title="Pilgrims of the Stars",
     page_icon="✦",
-    layout="wide",
+    layout="centered",
     initial_sidebar_state="expanded",
 )
 
@@ -274,6 +274,19 @@ hr { border-color: var(--border) !important; }
 .pill-yellow { background: rgba(200,168,76,0.12); color: var(--gold); border: 1px solid rgba(200,168,76,0.25); }
 
 #MainMenu, footer, header { visibility: hidden; }
+
+/* ── Mobile Responsiveness ── */
+@media (max-width: 768px) {
+    .rag-header { padding: 1rem 0; margin-bottom: 1rem; }
+    .rag-header .title { font-size: 1.6rem; letter-spacing: 0.08em; }
+    .rag-header .subtitle { font-size: 0.9rem; }
+    .bubble-user { max-width: 90%; padding: 0.7rem 1rem; font-size: 0.95rem; }
+    .bubble-bot { max-width: 95%; padding: 0.7rem 1rem; font-size: 0.95rem; }
+    .source-card { padding: 0.5rem 0.75rem; font-size: 0.85rem; }
+    .welcome { padding: 1.5rem 1rem; }
+    .welcome p { font-size: 1rem; line-height: 1.6; }
+    .stButton > button { padding: 0.4rem 0.8rem !important; }
+}
 </style>
 """, unsafe_allow_html=True)
 
@@ -361,7 +374,7 @@ with st.sidebar:
 
 
 # ── Main layout ───────────────────────────────────────────────────────────────
-col_pad_l, col_main, col_pad_r = st.columns([0.5, 9, 0.5])
+col_main = st.container()
 
 with col_main:
 

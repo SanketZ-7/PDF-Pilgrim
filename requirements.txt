@@ -1,0 +1,15 @@
+# Core RAG dependencies
+pypdf>=4.0.0                # PDF text extraction
+faiss-cpu>=1.7.4            # Vector similarity search (use faiss-gpu for CUDA)
+google-generativeai>=0.7.0  # Gemini Embedding + Chat API
+numpy>=1.26.0               # Numeric arrays
+tqdm>=4.66.0                # Progress bars
+python-dotenv>=1.0.0        # Load GEMINI_API_KEY from .env file
+
+# Streamlit frontend
+streamlit>=1.35.0
+
+# Optional — REST API
+fastapi>=0.111.0
+uvicorn[standard]>=0.29.0
+pydantic>=2.0.0

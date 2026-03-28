@@ -26,65 +26,77 @@ st.set_page_config(
 # ── Custom CSS ────────────────────────────────────────────────────────────────
 st.markdown("""
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap');
-
 :root {
-    --midnight:   #0b0d1a;
-    --deep-navy:  #0f1225;
-    --ink:        #141729;
-    --gold:       #c9a84c;
-    --gold-light: #e8c97a;
-    --gold-dim:   #7a6030;
-    --mist:       #d4cfc5;
-    --parchment:  #f0ead8;
-    --star-white: #f8f5ee;
-    --accent:     #7b5ea7;
-    --accent-soft:#a07fc8;
-    --border:     rgba(201,168,76,0.20);
-    --glow:       rgba(201,168,76,0.08);
+    --glass-bg: rgba(255, 255, 255, 0.06);
+    --glass-bg-strong: rgba(255, 255, 255, 0.12);
+    --glass-border: rgba(255, 255, 255, 0.15);
+    --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+    --text-main: #f5f5f7;
+    --text-muted: rgba(255, 255, 255, 0.65);
+    --accent: #0A84FF;
 }
 
 html, body, [class*="css"] {
-    font-family: 'EB Garamond', serif;
-    background-color: var(--midnight);
-    color: var(--mist);
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: var(--text-main);
 }
 
 .stApp {
-    background: radial-gradient(ellipse at 20% 0%, #1a1535 0%, var(--midnight) 60%),
-                radial-gradient(ellipse at 80% 100%, #0d1a2e 0%, transparent 60%);
-    background-blend-mode: screen;
+    background: radial-gradient(circle at top right, #2c2d3e 0%, #12131c 100%);
+    background-attachment: fixed;
+}
+
+/* Ambient glowing orbs for the macOS wallpaper effect */
+.stApp::before {
+    content: '';
+    position: fixed;
+    top: 10%;
+    left: 15%;
+    width: 400px;
+    height: 400px;
+    background: rgba(10, 132, 255, 0.35);
+    filter: blur(120px);
+    border-radius: 50%;
+    z-index: -1;
+}
+.stApp::after {
+    content: '';
+    position: fixed;
+    bottom: 10%;
+    right: 15%;
+    width: 350px;
+    height: 350px;
+    background: rgba(255, 55, 95, 0.25);
+    filter: blur(120px);
+    border-radius: 50%;
+    z-index: -1;
 }
 
 .rag-header {
     text-align: center;
     padding: 2rem 0 1.5rem;
-    border-bottom: 1px solid var(--border);
     margin-bottom: 1.5rem;
 }
 .rag-header .title {
-    font-family: 'Cinzel', serif;
     font-size: 2.2rem;
-    font-weight: 600;
-    letter-spacing: 0.12em;
-    color: var(--gold-light);
-    text-shadow: 0 0 40px rgba(201,168,76,0.3);
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    color: var(--text-main);
     margin: 0;
     line-height: 1.2;
 }
 .rag-header .subtitle {
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    font-size: 1.05rem;
-    color: var(--gold-dim);
-    letter-spacing: 0.08em;
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    letter-spacing: 0.02em;
     margin-top: 0.4rem;
+    font-weight: 400;
 }
 .rag-header .ornament {
-    color: var(--gold);
+    color: var(--text-muted);
     font-size: 1.2rem;
     letter-spacing: 0.5em;
-    opacity: 0.6;
+    opacity: 0.3;
     display: block;
     margin: 0.6rem 0;
 }
@@ -95,188 +107,177 @@ html, body, [class*="css"] {
 .msg-bot  { display: flex; justify-content: flex-start; }
 
 .bubble-user {
-    background: linear-gradient(135deg, #2a1f4a 0%, #1e1840 100%);
-    border: 1px solid rgba(123,94,167,0.4);
-    border-radius: 18px 18px 4px 18px;
+    background: var(--accent);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 20px 20px 4px 20px;
     padding: 0.85rem 1.2rem;
     max-width: 72%;
-    font-size: 1.25rem;
-    color: var(--star-white);
-    line-height: 1.65;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    font-size: 1.1rem;
+    color: #ffffff;
+    line-height: 1.5;
+    box-shadow: var(--glass-shadow);
 }
 .bubble-bot {
-    background: linear-gradient(135deg, #141a2e 0%, #0f1525 100%);
-    border: 1px solid var(--border);
-    border-radius: 18px 18px 18px 4px;
+    background: var(--glass-bg-strong);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px 20px 20px 4px;
     padding: 0.85rem 1.35rem;
     max-width: 82%;
-    font-size: 1.25rem;
-    color: var(--mist);
-    line-height: 1.75;
-    box-shadow: 0 4px 24px rgba(0,0,0,0.4), inset 0 0 40px var(--glow);
+    font-size: 1.1rem;
+    color: var(--text-main);
+    line-height: 1.6;
+    box-shadow: var(--glass-shadow);
 }
-.bubble-bot strong, .bubble-user strong { color: var(--gold-light); }
+.bubble-bot strong, .bubble-user strong { color: #ffffff; font-weight: 600; }
 
 .avatar-user {
-    font-family: 'Cinzel', serif;
-    font-size: 0.85rem;
-    letter-spacing: 0.15em;
-    color: var(--accent-soft);
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text-muted);
     text-align: right;
-    margin-bottom: 0.3rem;
-    opacity: 0.8;
+    margin-bottom: 0.4rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
 }
 .avatar-bot {
-    font-family: 'Cinzel', serif;
-    font-size: 0.85rem;
-    letter-spacing: 0.15em;
-    color: var(--gold-dim);
-    margin-bottom: 0.3rem;
-    opacity: 0.8;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    margin-bottom: 0.4rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
 }
 
 .source-card {
-    background: rgba(201,168,76,0.04);
-    border: 1px solid rgba(201,168,76,0.15);
-    border-left: 3px solid var(--gold-dim);
-    border-radius: 6px;
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
     padding: 0.75rem 1rem;
     margin-bottom: 0.7rem;
-    font-size: 1.1rem;
+    font-size: 0.95rem;
     line-height: 1.6;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
 }
 .source-page {
-    font-family: 'Cinzel', serif;
     font-size: 0.9rem;
-    letter-spacing: 0.12em;
-    color: var(--gold);
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    color: var(--text-main);
     margin-bottom: 0.4rem;
     display: flex;
     align-items: center;
     gap: 0.5rem;
 }
 .source-score {
-    background: rgba(201,168,76,0.12);
+    background: var(--glass-bg-strong);
+    border: 1px solid var(--glass-border);
     border-radius: 20px;
     padding: 0.1rem 0.5rem;
     font-size: 0.85rem;
-    color: var(--gold-dim);
+    color: var(--text-main);
 }
-.source-text { color: #a09a8f; font-style: italic; font-size: 1.05rem; }
+.source-text { color: var(--text-muted); font-size: 0.95rem; }
 
 .stTextInput > div > div > input {
-    background: rgba(20,26,46,0.9) !important;
-    border: 1px solid var(--border) !important;
-    border-radius: 12px !important;
-    color: var(--star-white) !important;
-    font-family: 'EB Garamond', serif !important;
-    font-size: 1.2rem !important;
-    padding: 0.75rem 1rem !important;
-    caret-color: var(--gold) !important;
+    background: var(--glass-bg) !important;
+    backdrop-filter: blur(16px) !important;
+    -webkit-backdrop-filter: blur(16px) !important;
+    border: 1px solid var(--glass-border) !important;
+    border-radius: 14px !important;
+    color: var(--text-main) !important;
+    font-size: 1.1rem !important;
+    padding: 0.8rem 1.2rem !important;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.1) !important;
 }
 .stTextInput > div > div > input:focus {
-    border-color: rgba(201,168,76,0.5) !important;
-    box-shadow: 0 0 0 3px rgba(201,168,76,0.08) !important;
+    border-color: var(--accent) !important;
+    box-shadow: 0 0 0 3px rgba(10, 132, 255, 0.3) !important;
 }
 .stTextInput > div > div > input::placeholder {
-    color: #4a5070 !important;
-    font-style: italic;
+    color: var(--text-muted) !important;
 }
 
 .stButton > button {
-    background: linear-gradient(135deg, #c9a84c 0%, #a0803a 100%) !important;
-    color: #0b0d1a !important;
-    border: none !important;
-    border-radius: 10px !important;
-    font-family: 'Cinzel', serif !important;
+    background: var(--glass-bg-strong) !important;
+    backdrop-filter: blur(16px) !important;
+    -webkit-backdrop-filter: blur(16px) !important;
+    color: var(--text-main) !important;
+    border: 1px solid var(--glass-border) !important;
+    border-radius: 12px !important;
     font-size: 1rem !important;
-    font-weight: 600 !important;
-    letter-spacing: 0.1em !important;
+    font-weight: 500 !important;
     padding: 0.5rem 1.2rem !important;
-    transition: opacity 0.2s, transform 0.15s !important;
+    box-shadow: var(--glass-shadow) !important;
+    transition: all 0.2s ease !important;
 }
-.stButton > button:hover { opacity: 0.88 !important; transform: translateY(-1px) !important; }
+.stButton > button:hover {
+    background: rgba(255, 255, 255, 0.15) !important;
+    transform: scale(1.02) !important;
+}
 
-hr { border-color: var(--border) !important; }
+hr { border-color: var(--glass-border) !important; }
 
 .streamlit-expanderHeader {
-    font-family: 'Cinzel', serif !important;
     font-size: 0.95rem !important;
-    letter-spacing: 0.1em !important;
-    color: var(--gold-dim) !important;
-    background: rgba(201,168,76,0.03) !important;
-    border: 1px solid var(--border) !important;
-    border-radius: 8px !important;
+    font-weight: 500 !important;
+    color: var(--text-main) !important;
+    background: var(--glass-bg) !important;
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+    border: 1px solid var(--glass-border) !important;
+    border-radius: 12px !important;
 }
 .streamlit-expanderContent {
-    border: 1px solid var(--border) !important;
+    border: 1px solid var(--glass-border) !important;
     border-top: none !important;
-    border-radius: 0 0 8px 8px !important;
-    background: rgba(11,13,26,0.6) !important;
-    padding: 0.75rem !important;
+    border-radius: 0 0 12px 12px !important;
+    background: rgba(0, 0, 0, 0.2) !important;
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+    padding: 1rem !important;
 }
 
-.stSpinner > div { border-top-color: var(--gold) !important; }
-
-.info-box {
-    background: rgba(201,168,76,0.05);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 1rem 1.1rem;
-    margin-bottom: 1rem;
-    font-size: 0.88rem;
-    line-height: 1.65;
-    color: #9a9585;
-}
-.info-box .label {
-    font-family: 'Cinzel', serif;
-    font-size: 0.65rem;
-    letter-spacing: 0.15em;
-    color: var(--gold-dim);
-    margin-bottom: 0.35rem;
-}
+.stSpinner > div { border-top-color: var(--accent) !important; }
 
 .welcome {
     text-align: center;
     padding: 3rem 2rem;
-    opacity: 0.65;
+    background: var(--glass-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    box-shadow: var(--glass-shadow);
+    margin-top: 2rem;
 }
 .welcome .star { font-size: 2.5rem; display: block; margin-bottom: 1rem; }
 .welcome p {
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    font-size: 1.4rem;
-    color: var(--gold-dim);
+    font-size: 1.15rem;
+    color: var(--text-main);
     max-width: 480px;
     margin: 0 auto;
     line-height: 1.8;
+    font-weight: 300;
 }
-
-.pill {
-    display: inline-block;
-    padding: 0.15rem 0.65rem;
-    border-radius: 20px;
-    font-family: 'Cinzel', serif;
-    font-size: 0.6rem;
-    letter-spacing: 0.1em;
-    font-weight: 600;
-}
-.pill-green { background: rgba(80,200,100,0.12); color: #5ec870; border: 1px solid rgba(80,200,100,0.25); }
-.pill-yellow { background: rgba(200,168,76,0.12); color: var(--gold); border: 1px solid rgba(200,168,76,0.25); }
 
 #MainMenu, footer, header { visibility: hidden; }
 
 /* ── Mobile Responsiveness ── */
 @media (max-width: 768px) {
     .rag-header { padding: 1rem 0; margin-bottom: 1rem; }
-    .rag-header .title { font-size: 2rem; letter-spacing: 0.08em; }
-    .rag-header .subtitle { font-size: 1.1rem; }
-    .bubble-user { max-width: 90%; padding: 0.7rem 1rem; font-size: 1.15rem; }
-    .bubble-bot { max-width: 95%; padding: 0.7rem 1rem; font-size: 1.15rem; }
-    .source-card { padding: 0.5rem 0.75rem; font-size: 1rem; }
+    .rag-header .title { font-size: 2rem; }
+    .rag-header .subtitle { font-size: 1rem; }
+    .bubble-user { max-width: 90%; padding: 0.7rem 1rem; font-size: 1.05rem; }
+    .bubble-bot { max-width: 95%; padding: 0.7rem 1rem; font-size: 1.05rem; }
+    .source-card { padding: 0.6rem 0.8rem; font-size: 0.95rem; }
     .welcome { padding: 1.5rem 1rem; }
-    .welcome p { font-size: 1.2rem; line-height: 1.6; }
+    .welcome p { font-size: 1.05rem; line-height: 1.5; }
     .stButton > button { padding: 0.4rem 0.8rem !important; }
 }
 </style>
@@ -390,8 +391,8 @@ with col_main:
 
     # ── Example prompts ──
     st.markdown(
-        '<div style="font-family:\'Cinzel\',serif; font-size:0.85rem; '
-        'letter-spacing:0.12em; color:#4a5070; margin:0.5rem 0 0.4rem;">'
+        '<div style="font-size:0.85rem; font-weight:600; '
+        'letter-spacing:0.05em; color:var(--text-muted); margin:0.5rem 0 0.4rem; text-transform:uppercase;">'
         'EXAMPLE QUESTIONS</div>',
         unsafe_allow_html=True,
     )

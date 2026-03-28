@@ -47,7 +47,7 @@
 │  └───────────────────────────────────────────────┘              │
 │      │                                                           │
 │      ▼                                                           │
-│  Gemini 1.5 Flash (generate_content, temp=0.2)                  │
+│  Gemini 3.1 Pro Preview (generate_content, temp=0.2)            │
 │      │                                                           │
 │      ▼                                                           │
 │  Grounded answer with page citations  ──▶  User                 │
@@ -251,7 +251,7 @@ Response:
 |----------|---------|-------------|
 | `GEMINI_API_KEY` | env var | Your Google AI Studio API key |
 | `EMBEDDING_MODEL` | `text-embedding-004` | Gemini embedding model (768-dim) |
-| `CHAT_MODEL` | `gemini-1.5-flash` | Gemini generative model |
+| `CHAT_MODEL` | `gemini-3.1-pro-preview` | Gemini generative model |
 | `CHUNK_SIZE` | `800` | Characters per chunk |
 | `CHUNK_OVERLAP` | `150` | Overlap between consecutive chunks |
 | `TOP_K` | `5` | Chunks retrieved per query |

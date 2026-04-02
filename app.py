@@ -180,19 +180,23 @@ html, body, [class*="css"] {
 }
 
 .stButton > button {
-    background: transparent !important;
-    color: var(--book-gold) !important;
-    border: 1px solid var(--book-gold) !important;
-    border-radius: 4px !important;
+    background: #171c2b !important;
+    color: var(--book-parchment) !important;
+    border: 1px solid var(--book-gold-dim) !important;
+    border-radius: 2px 16px 16px 16px !important;
     font-family: 'Cinzel', serif !important;
     font-size: 1.05rem !important;
     letter-spacing: 0.1em !important;
-    padding: 0.6rem 1.2rem !important;
-    transition: all 0.2s ease !important;
+    padding: 0.85rem 1.2rem !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4) !important;
+    transition: all 0.3s ease !important;
 }
 .stButton > button:hover {
-    background: var(--book-gold) !important;
-    color: var(--book-bg) !important;
+    background: var(--book-page) !important;
+    color: var(--book-gold) !important;
+    border-color: var(--book-gold) !important;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5) !important;
+    transform: translateY(-2px) !important;
 }
 
 hr { border-color: var(--book-border) !important; }

@@ -358,7 +358,7 @@ with col_main:
             key="query_input",
         )
     with btn_col:
-        send = st.button("✦  Ask", use_container_width=True)
+        send = st.button("✦  Enter", use_container_width=True)
 
     # ── Example prompts ──
     st.markdown(

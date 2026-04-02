@@ -80,7 +80,7 @@ def _show_sources(sources: list[dict[str, Any]]) -> None:
     for i, s in enumerate(sources, start=1):
         print(f"  [{i}] Page {s['page']}  (similarity: {s['score']:.3f})")
         snippet = s["text"][:200].replace("\n", " ")
-        print(f'      "{snippet}…"')
+        print(f'      "{snippet}..."')
     _hr()
 
 
@@ -103,7 +103,7 @@ def main() -> None:
 
     while True:
         try:
-            user_input = input("You › ").strip()
+            user_input = input("You > ").strip()
         except (EOFError, KeyboardInterrupt):
             print("\n[Session ended]")
             break
@@ -130,7 +130,7 @@ def main() -> None:
             continue
 
         # ── RAG pipeline ─────────────────────────────────────────────────────
-        print("  ⟳  Retrieving relevant passages …", end="\r")
+        print("  -> Retrieving relevant passages ...", end="\r")
 
         try:
             sources = retrieve(user_input, top_k=config.TOP_K)
@@ -140,7 +140,7 @@ def main() -> None:
 
         context = build_context(sources)
 
-        print("  ⟳  Generating answer …             ", end="\r")
+        print("  -> Generating answer ...             ", end="\r")
 
         try:
             answer = generate_answer(user_input, context)
@@ -151,7 +151,7 @@ def main() -> None:
         # ── Display ───────────────────────────────────────────────────────────
         print(" " * 50, end="\r")    # clear spinner line
         _hr()
-        _wrap(answer, prefix="Bot › ")
+        _wrap(answer, prefix="Bot > ")
         _hr()
 
         # ── Update state ──────────────────────────────────────────────────────

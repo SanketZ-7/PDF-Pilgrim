@@ -180,19 +180,20 @@ html, body, [class*="css"] {
 }
 
 .stButton > button {
-    background: #171c2b !important;
-    color: var(--book-parchment) !important;
+    background: var(--book-parchment) !important;
+    color: var(--book-bg) !important;
     border: 1px solid var(--book-gold-dim) !important;
     border-radius: 2px 16px 16px 16px !important;
     font-family: 'Cinzel', serif !important;
     font-size: 1.05rem !important;
+    font-weight: 600 !important;
     letter-spacing: 0.1em !important;
     padding: 0.85rem 1.2rem !important;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4) !important;
     transition: all 0.3s ease !important;
 }
 .stButton > button:hover {
-    background: var(--book-page) !important;
+    background: #171c2b !important;
     color: var(--book-gold) !important;
     border-color: var(--book-gold) !important;
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5) !important;
